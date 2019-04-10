@@ -13,12 +13,12 @@ public_folder: /img
 collections:
   - name: "setting" # Used in routes, e.g., /admin/collections/blog
     label: "設定" # Used in the UI
+    editor:
+      preview: false
     files: 
       - name: "main"
         label: "主設定"
         file: "src/md/setting.md" # The path to the folder where the documents are stored
-        editor:
-          preview: false
         fields: # The fields for each document, usually in front matter
           - {label: "公司介紹", name: "description", widget: "text"}
           - {label: "網頁縮略圖", name: "thumbnail", widget: "image"}
