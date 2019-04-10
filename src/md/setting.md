@@ -7,7 +7,7 @@ indexCarousel:
     - /img/2.png
     - /img/3.png
     - /img/4.png
-indexIntroImage: 首頁公司簡介圖片首頁公司簡介圖片
+indexIntroImage: /img/2.png
 keywords: 
     - 關鍵字1
     - 關鍵字2
