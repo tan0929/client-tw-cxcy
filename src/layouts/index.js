@@ -6,35 +6,51 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
+import SEO from '../components/seo';
 
 //need to fix the reactbreakpoints warning
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
-    <div>
       <StaticQuery
-        query={graphql`
-          query SiteTitleQuery {
-            site {
-              siteMetadata {
-                title
-              }
-            }
-          }
-        `}
-        render={data => (
-            <Header 
-              siteTitle={data.site.siteMetadata.title}
-            />
-        )}
+        query={query}
+        render={data => <Content data={data} children={children}/>}
       />
-      <div>
-        <GlobalStyle />
-        <main>{children}</main>
-        <Footer />
-      </div>
-    </div>
   </ThemeProvider>
 )
+
+const Content = ({data,children})=>(
+  <div>
+    <SEO 
+      title={data.site.siteMetadata.title} 
+      keywords={data.setting.edges[0].node.frontmatter.keywords} 
+    />
+    <GlobalStyle />
+    <Header />
+    <main>{children}</main>
+    <Footer />
+  </div>
+);
+
+const query = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    setting: allMarkdownRemark( filter: { 
+      frontmatter:{ type:{ eq: "setting" } }
+    }){
+      edges{
+        node{
+          frontmatter{
+            keywords
+          }
+        }
+      }
+    }
+  }
+`
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

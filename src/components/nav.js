@@ -30,14 +30,14 @@ const options = [
 ];
 
 const Text = styled.div`
-    color: ${({theme})=>theme.color.secondary}
-    font-size: 20px;
+    color: ${({theme})=>theme.color.text.primary}
+    font-size: 16px;
 `;
 
 const TabletItemWrapper = styled(Text)`
     display: inline-block;
-    padding: 10px;
-    min-width: 80px;
+    padding: 8px;
+    min-width: 70px;
     text-align: center;
 `;
 

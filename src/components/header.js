@@ -3,45 +3,28 @@ import React from "react"
 import styled from 'styled-components';
 import Nav from './nav';
 
+import FakeLogo from './fakeLogo';
+
 const StyledHeader = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
   user-select: none;
-  background-color: ${({theme})=>theme.color.main};
+  background-color: ${({theme})=>theme.color.primary};
   display: flex;
 `;
 
 const TitleWrapper = styled.div`
   flex-grow: 1;
-  min-width: 150px;
-  padding: 15px 40px;
+  padding: 15px 0 15px 140px;
   -webkit-tap-highlight-color: transparent;
 `;
-
-//temporarily for FakeLogo
-const StyledLogo = styled.div`
-  color: ${({theme})=> theme.color.secondary}
-  font-size: 30px;
-  border: 1px solid ${({theme})=> theme.color.secondary}
-  width: 100px;
-  margin-left: 10vw;
-  padding: 10px;
-  text-align: center;
-`;
-
-//fake logo
-const FakeLogo = ()=>(
-  <StyledLogo>
-    宸心宸意工程
-  </StyledLogo>
-)
 
 const Title = ()=>(
   <FakeLogo />
 )
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <StyledHeader>
     <TitleWrapper>
       <Title />
