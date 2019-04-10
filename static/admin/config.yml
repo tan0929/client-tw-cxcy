@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master # Branch to update (optional; defaults to master)
+  branch: dev # Branch to update (optional; defaults to master)
 
 # This line should *not* be indented
 publish_mode: editorial_workflow
@@ -12,16 +12,27 @@ public_folder: /img
 
 collections:
   - name: "setting" # Used in routes, e.g., /admin/collections/blog
-    label: "主要設定" # Used in the UI
-    folder: "src/md/setting" # The path to the folder where the documents are stored
-    create: false
-    delete: false
-    editor:
-      preview: false
-    fields: # The fields for each document, usually in front matter
-      - {label: "公司介紹", name: "description", widget: "text"}
-      - {label: "網頁縮略圖", name: "thumbnail", widget: "image"}
-      - {label: "首頁輪播圖片", name: "indexCarousel", widget: "image"} # TODO 應該做成可添加的列表
-      - {label: "首頁公司簡介圖片", name: "indexIntroImage", widget: "image"}
-      - {label: "關鍵字", name: "keywords", widget: "list", default: ["keyword1", "keyword2", "keyword3"]}
-      # 公司電話，地址，等等，可能會更改的所有重要信息
+    label: "設定" # Used in the UI
+    files: 
+      - name: "main"
+        label: "主設定"
+        file: "src/md/setting.md" # The path to the folder where the documents are stored
+        ## create: false
+        ## delete: false
+        ## editor:
+          ## preview: false
+        fields: # The fields for each document, usually in front matter
+          - {label: "公司介紹", name: "description", widget: "text"}
+          - {label: "網頁縮略圖", name: "thumbnail", widget: "image"}
+          - {label: "首頁輪播圖片", name: "indexCarousel", widget: "image"} # TODO 應該做成可添加的列表
+          - {label: "首頁公司簡介圖片", name: "indexIntroImage", widget: "image"}
+          - {label: "關鍵字", name: "keywords", widget: "list", default: ["keyword1", "keyword2", "keyword3"]}
+          # 公司電話，地址，等等，可能會更改的所有重要信息
+  - name: "services"
+    label: "服務項目"
+    folder: "src/pages/services"
+    create: true
+    delete: true
+    fields:
+      - {label: "項目名稱", name: "title", widget: "text"}
+      - {label: "項目簡介", name: "description", widget: "text"}
