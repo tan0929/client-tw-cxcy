@@ -13,6 +13,7 @@ public_folder: /img
 collections:
   - name: "setting" # Used in routes, e.g., /admin/collections/blog
     label: "設定" # Used in the UI
+    delete: false
     editor:
       preview: false
     files: 
