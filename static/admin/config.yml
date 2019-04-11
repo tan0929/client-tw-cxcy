@@ -42,11 +42,14 @@ collections:
       - {label: "項目簡介", name: "description", widget: "text"}
       - label: "圖集"
         name: "gallerys"
-        widget: "list"
         fields: 
-          - {label: "標題", name: "title", widget: "string"}
           - label: "圖片組合"
             name: "gallery"
             widget: "list"
-            allow_add: true
-            field: {label: "圖片", name: "image", widget: "image"}
+            fields: 
+              - {label: "標題", name: "title", widget: "string"}
+              - label: "内容"
+                name: "content"
+                widget: "list"
+                allow_add: true
+                field: {label: "圖片", name: "image", widget: "image"}
