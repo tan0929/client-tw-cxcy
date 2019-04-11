@@ -34,7 +34,7 @@ collections:
   - name: "services"
     label: "服務項目"
     folder: "src/pages/services"
-    slug: "{{title}}"
+    slug: "{{slug}}"
     create: true
     delete: true
     fields:
