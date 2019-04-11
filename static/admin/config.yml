@@ -38,5 +38,5 @@ collections:
     create: true
     delete: true
     fields:
-      - {label: "項目名稱", name: "title", widget: "text"}
+      - {label: "項目名稱", name: "title", widget: "string"}
       - {label: "項目簡介", name: "description", widget: "text"}
