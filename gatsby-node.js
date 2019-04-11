@@ -6,10 +6,49 @@
 
 // You can delete this file if you're not using it
 
-//const path = require('path');
+const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
-//const _ = require('lodash');
+const _ = require('lodash');
+
+exports.createPages=({graphql, actions})=>{
+  const { createPage } = actions;
+  return graphql(`{
+    allMarkdownRemark(filter:{frontmatter:{type :{
+      eq: "page"
+    }}}){
+      edges{
+        node{
+          fields{
+            slug
+          }
+          frontmatter{
+            templateKey
+          }
+          id
+        }
+      }
+    }
+  }`).then( res=>{
+    if(res.errors){
+      return Promise.reject(res.errors);
+    }
+    const pages = res.data.allMarkdownRemark.edges;
+    pages.forEach(({node})=>{
+      const id = node.id;
+      const pagePath = `/${_.kebabCase(node.fields.slug)}/`;
+      createPage(
+        {
+          path: pagePath,
+          component: path.resolve(`src/templates/${String(node.frontmatter.templateKey)}.js`),
+          context: {
+            id,
+          }
+        }
+      );
+    });
+  });
+}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;

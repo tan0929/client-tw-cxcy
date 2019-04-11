@@ -38,6 +38,8 @@ collections:
     create: true
     delete: true
     fields:
+      - {label: "Type", name: "type", widget: "hidden", default: "page"}
+      - {label: "TemplateKey", name: "templateKey", widget: "hidden", default: "service"}
       - {label: "項目名稱", name: "title", widget: "string"}
       - {label: "項目簡介", name: "description", widget: "text"}
       - label: "圖集"
