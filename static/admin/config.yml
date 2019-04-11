@@ -42,6 +42,7 @@ collections:
       - {label: "項目簡介", name: "description", widget: "text"}
       - label: "圖集"
         name: "gallerys"
+        widget: "object"
         fields: 
           - label: "圖片組合"
             name: "gallery"
