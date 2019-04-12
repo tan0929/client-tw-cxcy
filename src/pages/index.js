@@ -22,20 +22,36 @@ const Wrapper = styled.div`
   padding: 60px;
 `;
 
-const Content = ({data})=>(
-  <Wrapper>
-    <CarouselWrapper>
-      <Carousel autoplay autoplayInterval={8 * 1000} pauseOnHover swiping cellSpacing={5} wrapAround>
-        {data.setting.edges[0].node.frontmatter.indexCarousel.map(({childImageSharp},index)=>(
-          <Image fluid={childImageSharp.fluid} key={index}/>
+const Content = ({data})=>{
+  const { title, description, indexCarousel, indexIntroImage } = data.setting.edges[0].node.frontmatter;
+  return(
+    <Wrapper>
+      <CarouselWrapper>
+        <Carousel autoplay autoplayInterval={8 * 1000} pauseOnHover swiping cellSpacing={5} wrapAround>
+          {indexCarousel.map(({childImageSharp},index)=>(
+            <Image fluid={childImageSharp.fluid} key={index}/>
+          ))}
+        </Carousel>
+      </CarouselWrapper>
+      <Intro 
+        title={title}
+        description={description}
+        descriptionLimit={100}
+        fluid={indexIntroImage.childImageSharp.fluid}/>
+      {
+        data.services.edges.map(({node},index)=>(
+          <Card 
+            key={index}
+            title={node.frontmatter.title}
+            subtitle={node.frontmatter.subtitle}
+            description={node.frontmatter.description}
+            descriptionLimit={57}
+            fluid={node.frontmatter.thumbnail.childImageSharp.fluid}
+          />
         ))}
-      </Carousel>
-    </CarouselWrapper>
-    <Intro />
-    <Card />
-    <div></div>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+};
 
 const IndexPage = () => (
   <StaticQuery 
@@ -46,19 +62,6 @@ const IndexPage = () => (
 
 export default IndexPage;
 
-export const IndexPageTemplate = ({
-  description,
-  thumbnail,
-  indexCarousel,
-  indexIntroImage,
-})=>{
-  
-  return(
-  <div>
-
-  </div>
-)};
-
 
 const query = graphql`
   query {
@@ -68,10 +71,38 @@ const query = graphql`
       edges{
         node{
           frontmatter{
+            title
             description
             indexCarousel{
               childImageSharp{
                 fluid(maxWidth: 2048){
+                  ...GatsbyImageSharpFluid_noBase64
+                }
+              }
+            }
+            indexIntroImage{
+              childImageSharp{
+                fluid(maxWidth: 400){
+                  ...GatsbyImageSharpFluid_noBase64
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    services: allMarkdownRemark( filter: { 
+      frontmatter:{ templateKey:{ eq: "service" } }
+    }){
+      edges{
+        node{
+          frontmatter{
+            title
+            subtitle
+            description
+            thumbnail{
+              childImageSharp{
+                fluid(maxWidth: 300){
                   ...GatsbyImageSharpFluid_noBase64
                 }
               }

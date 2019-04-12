@@ -1,10 +1,11 @@
 const theme = {
     color: {
         primary : '#2F2E2E',
-        secondary: '#F9F9F9',
+        secondary: '#b7b7b7',
+        card: '#E5E5DE',
         text: {
             primary: '#B2B1B1',
-            secondary: '#858585',
+            secondary: '#3f3f3f',
             error: '#943616',
         }
     },

@@ -3,6 +3,9 @@ import ReactResizeDetector from 'react-resize-detector';
 import styled from 'styled-components';
 import theme from '../theme';
 import Facebook from './facebook';
+import { StaticQuery, graphql } from 'gatsby';
+import NavItem from './navItem';
+import AbsoluteMenu from './menu';
 
 const options = [
     {
@@ -11,13 +14,11 @@ const options = [
     },
     {
         name: '服務項目',
-        path: '/services',
-        children: 'services',
+        menu: 'services',
     },
     {
         name: '產品訂購',
-        path: '/products',
-        children: 'products',
+        menu: 'products',
     },
     {
         name: '關於',
@@ -29,23 +30,50 @@ const options = [
     },
 ];
 
-const Text = styled.div`
-    color: ${({theme})=>theme.color.text.primary}
-    font-size: 16px;
-`;
 
-const TabletItemWrapper = styled(Text)`
-    display: inline-block;
-    padding: 8px;
-    min-width: 70px;
-    text-align: center;
-`;
+const TabletOptions = options.map(({name, path, menu}, index)=>{
 
-const TabletOptions = options.map(({name, path}, index)=>(
-    <TabletItemWrapper key={index}>
-        {name}
-    </TabletItemWrapper>
-))
+    return(
+        <NavItem menu={!!menu} key={index}>
+            {name}
+            {menu && 
+                <StaticQuery
+                    query={graphql`
+                        query{
+                            services: allMarkdownRemark(filter:{ frontmatter:{ templateKey:{ eq: "service"}}}){
+                                edges{
+                                    node{
+                                        frontmatter{
+                                            title
+                                        }
+                                    }
+                                }
+                            }
+                            products: allMarkdownRemark(filter:{ frontmatter:{ templateKey:{ eq: "product"}}}){
+                                edges{
+                                    node{
+                                        frontmatter{
+                                            title
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    `}
+                    render={data=>{
+                        if(menu==="services"){
+                            return <AbsoluteMenu values={data.services.edges}></AbsoluteMenu>
+                        }else if(menu==="products"){
+                            return <AbsoluteMenu values={data.products.edges}></AbsoluteMenu>
+                        }else{
+                            return <AbsoluteMenu />
+                        }
+                    }}
+                />
+            }
+        </NavItem>
+    )
+});
 
 const TabletOptionsWrapper = styled.div`
     display: flex;
@@ -62,7 +90,7 @@ const TabletNav = ()=>(
 );
 
 const MobileNav = ()=>(
-    <Text>MobileNav</Text>
+    <NavItem>MobileNav</NavItem>
 );
 
 const Nav = ()=>{
