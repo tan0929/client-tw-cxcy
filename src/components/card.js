@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 import Button from './button';
+import Link from './betterLink';
 
 const Wrapper = styled.div`
     display: flex;
@@ -50,11 +51,11 @@ const Description = styled.div`
     ${({theme})=>theme ? `color: ${theme.color.text.secondary};` : ``}
 `;
 
-const InfoButton = styled(Button)`
+const InfoLink = styled(Link)`
     align-self: flex-end;
 `;
 
-const Card =({title, subtitle, description, descriptionLimit, fluid})=>{
+const Card =({title, subtitle, description, descriptionLimit, fluid, link})=>{
     if(descriptionLimit){
         description = 
             description.length > descriptionLimit 
@@ -70,7 +71,9 @@ const Card =({title, subtitle, description, descriptionLimit, fluid})=>{
                 <Title>{title}</Title>
                 <Subtitle>{subtitle}</Subtitle>
                 <Description>{description}</Description>
-                <InfoButton text="了解更多" />
+                <InfoLink to={link}>
+                    <Button text="了解更多" />
+                </InfoLink>
             </ContentWrapper>
         </Wrapper>
     );

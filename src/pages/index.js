@@ -47,6 +47,7 @@ const Content = ({data})=>{
             description={node.frontmatter.description}
             descriptionLimit={57}
             fluid={node.frontmatter.thumbnail.childImageSharp.fluid}
+            link={node.fields.slug}
           />
         ))}
     </Wrapper>
@@ -96,6 +97,9 @@ const query = graphql`
     }){
       edges{
         node{
+          fields{
+            slug
+          }
           frontmatter{
             title
             subtitle

@@ -36,7 +36,8 @@ exports.createPages=({graphql, actions})=>{
     const pages = res.data.allMarkdownRemark.edges;
     pages.forEach(({node})=>{
       const id = node.id;
-      const pagePath = `/${_.kebabCase(node.fields.slug)}/`;
+      //const pagePath = `/${_.kebabCase(node.fields.slug)}/`;
+      const pagePath = node.fields.slug;
       createPage(
         {
           path: pagePath,
