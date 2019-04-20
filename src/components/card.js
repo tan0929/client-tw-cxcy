@@ -3,20 +3,33 @@ import styled from 'styled-components';
 import Img from 'gatsby-image';
 import Button from './button';
 import Link from './betterLink';
+import breakpoint from 'styled-components-breakpoint';
 
 const Wrapper = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    ${breakpoint('tablet')`
+        flex-direction: row;
+        width: 640px;
+        height: 220px;
+    `}
     margin: 30px auto;
-    width: 640px;
-    height: 220px;
     background-color: ${({theme})=>theme.color.card};
 `;
 
 const ThumbnailWrapper = styled.div`
     box-sizing: border-box;
-    padding: 15px;
-    width: 220px;
-    height: 220px;
+    padding: 5px;
+    ${breakpoint('tablet')`
+        padding: 15px;
+        width: 220px;
+        height: 220px;
+    `}
+    width: 200px;
+    height: 200px;
 `;
 
 const Thumbnail = styled(Img)`
@@ -29,12 +42,19 @@ const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 8px 25px;
-    width: 440px;
+    padding: 8px 25px 25px 40px;
+    ${breakpoint('tablet')`
+        width: 440px;
+        padding: 8px 25px;
+    `}
+    
 `;
 
 const Title = styled.div`
-    padding: 6px;
+    ${breakpoint('tablet')`
+        padding: 6px;
+    `}
+    
     font-size: 26px;
     ${({theme})=>theme ? `color: ${theme.color.text.secondary};` : ``}
 `;

@@ -1,40 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import breakpoint from 'styled-components-breakpoint';
 import Button from '../components/button';
-
-const IntroWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 900px;
-    margin: auto;
-`;
-
-const Title = styled.div`
-    align-self: start;
-    padding: 120px 0 0 0;
-    text-align: center;
-    min-width: 300px;
-    width: 300px;
-    font-size: 65px;
-`;
-
-const Underline = styled.div`
-    display: inline-block;
-    border-bottom: 2px solid ${({theme})=> theme? `${theme.color.text.secondary}`: `#3f3f3f`};
-`;
-
-const Description = styled.div`
-    flex: 1;
-    box-sizeing: border-box;
-    padding: 120px 30px 60px 15px;
-`;
+import Album from '../components/album';
+import TextCard from '../components/textCard';
 
 const QuoteButton = styled(Button)`
     display: block;
-    margin: 0 auto 120px auto;
+    margin: 0 auto 90px auto;
+`;
+
+const TextCardWrapper = styled.div`
+    padding: 120px 0 30px 0;
+`;
+
+const AlbumWrapper = styled.div`
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px 90px 40px;
 `;
 
 export const ServiceTemplate = ({
@@ -45,26 +32,25 @@ export const ServiceTemplate = ({
     keywords
 })=>(
     <div>
-        <IntroWrapper>
-            <Title>
-                <Underline>
-                    {title}
-                </Underline>
-            </Title>
-            <Description>
-                {description}
-            </Description>
-        </IntroWrapper>
+        <TextCardWrapper>
+            <TextCard title={title} description={description} />
+        </TextCardWrapper>
         <QuoteButton text="咨詢估價" />
+        <AlbumWrapper>
+            {gallery.albums.map(({title,content},index)=>{
+                return(<Album key={index} title={title} content={content} />)
+            })}
+        </AlbumWrapper>
     </div>
 );
 
 const Service = ({data})=>{ 
-    const { title, description } = data.markdownRemark.frontmatter;
+    const { title, description, gallery } = data.markdownRemark.frontmatter;
     return(
         <ServiceTemplate
             title={title}
             description={description}
+            gallery={gallery}
         />
     )
 };
@@ -77,6 +63,12 @@ export const query = graphql`
             frontmatter{
                 title
                 description
+                gallery{
+                    albums{
+                        title
+                        content
+                    }
+                }
             }
         }
     }

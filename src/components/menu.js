@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavItem from './navItem';
+import BetterLink from './betterLink';
+import breakpoint from 'styled-components-breakpoint';
 
 const MenuItem = styled.div`
     margin: auto;
@@ -9,8 +11,9 @@ const MenuItem = styled.div`
 
 const Wrapper = styled.div`
     display: none;
+    overflow: hidden;
+    padding: 8px 0;
     box-sizing: border-box;
-    padding: 8px;
     width: 180px;
     text-align: center;
     background-color: ${({theme})=>theme.color.secondary}
@@ -18,32 +21,25 @@ const Wrapper = styled.div`
     ${NavItem}:hover & {
         display: block;
     }
+    ${breakpoint('tablet')`
+        position: absolute;
+        left: 0;
+        top: 39px;
+    `}
 `;
 
-const AbsoluteWrapper = styled(Wrapper)`
-    position: absolute;
-    left: 0;
-    top: 39px;
-`;
-
-export const AbsoluteMenu = ({values})=>{
+const Menu = ({values, setVisible})=>{
     
     return(
-        <AbsoluteWrapper>
-            {values && values.length > 0 ? values.map(({node},index)=>(
-                <MenuItem key={index}>{node.frontmatter.title}</MenuItem>
-            )): <div>Empty Menu</div>}
-        </AbsoluteWrapper>
-    )
-};
-
-export const StaticMenu = ({type})=>{
-    return(
         <Wrapper>
-
+            {values && values.length > 0 ? values.map(({node},index)=>(
+                <BetterLink key={index} to={node.fields.slug}>
+                    <MenuItem onClick={()=>setVisible(false)}>{node.frontmatter.title}</MenuItem>
+                </BetterLink>
+            )): <div>Empty Menu</div>}
         </Wrapper>
     )
 };
 
-export default AbsoluteMenu;
+export default Menu;
 

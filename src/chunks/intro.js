@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../components/button';
 import Img from 'gatsby-image';
+import breakpoint from 'styled-components-breakpoint';
 
 
 const Item = styled.div`
@@ -9,8 +10,12 @@ const Item = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 250px;
+    ${breakpoint('tablet')`
+        width: 300px;
+        height: 300px;
+    `}
     text-align: center;
 `;
 
@@ -18,16 +23,23 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 0 60px 0;
+    flex-direction: column;
+    ${breakpoint('tablet')`
+        flex-direction: row;
+    `}
 `;
 
 const Line = styled.div`
-    height: 240px;
-    border-right: 2px solid black; 
-`;
-
-const IntroButton = styled(Button)`
-    margin: auto;
+    height: 1px;
+    width: 240px
+    border-bottom: 2px solid black;
+    border-right: none; 
+    ${breakpoint('tablet')`
+        height: 240px;
+        width: 1px;
+        border-bottom: none; 
+        border-right: 2px solid black; 
+    `}
 `;
 
 const Text = styled.p`
@@ -59,11 +71,10 @@ const Intro = ({title, description, fluid, descriptionLimit})=>{
             <Line />
             <Item>
                 <Text size="16px">{description}</Text>
-                <IntroButton text="了解更多"/>
             </Item>
             <Item>
                 <Image fluid={fluid} />
-            </Item>    
+            </Item>
         </Wrapper>
     );
 };

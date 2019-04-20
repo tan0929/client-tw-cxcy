@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "James Tan <contact@jamestan.me>",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.3.3",
     "gatsby-image": "^2.0.35",
@@ -21,6 +22,7 @@
     "gatsby-source-filesystem": "^2.0.28",
     "gatsby-transformer-remark": "^2.3.8",
     "gatsby-transformer-sharp": "^2.1.17",
+    "lodash": "^4.17.11",
     "netlify-cms": "^2.9.1",
     "nuka-carousel": "^4.5.3",
     "prop-types": "^15.7.2",

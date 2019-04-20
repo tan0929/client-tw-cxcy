@@ -30,6 +30,7 @@ collections:
             allow_add: true
             field: {label: "圖片", name: "image", widget: "image"}
           - {label: "首頁公司簡介圖片", name: "indexIntroImage", widget: "image"}
+          - {label: "關於頁面橫幅", name: "aboutBanner", widget: "image"}
           - {label: "關鍵字", name: "keywords", widget: "list", default: ["keyword1", "keyword2", "keyword3"]}
           # 公司電話，地址，等等，可能會更改的所有重要信息
   - name: "services"
@@ -50,7 +51,7 @@ collections:
         widget: "object"
         fields: 
           - label: "圖片組合"
-            name: "groups"
+            name: "albums"
             widget: "list"
             fields: 
               - {label: "標題", name: "title", widget: "string"}
