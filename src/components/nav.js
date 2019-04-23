@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ReactResizeDetector from 'react-resize-detector';
 import styled from 'styled-components';
 import theme from '../theme';
-import Facebook from './facebook';
+import FacebookLink from './facebookLink';
 import { StaticQuery, graphql } from 'gatsby';
 import NavItem, { Text } from './navItem';
 import Menu from './menu';
@@ -47,7 +47,7 @@ const Options = ({setVisible})=>{
         return(
             <NavItem menu={!!menu} key={index}>
                 {
-                    path? <BetterLink to={path} onClick={()=>setVisible(false)}><Text>{name}</Text></BetterLink>
+                    path? <BetterLink to={path} onClick={()=>setVisible && setVisible(false)}><Text>{name}</Text></BetterLink>
                     : name
                 }
                 {menu && 
@@ -89,6 +89,8 @@ const Options = ({setVisible})=>{
                                 case "products":
                                     menuValue = data.products.edges;
                                     break;
+                                default:
+                                    break;
                             }
                             return(
                                 <Menu values={menuValue} setVisible={setVisible}/>
@@ -101,12 +103,18 @@ const Options = ({setVisible})=>{
     });
     return(
         <ReactResizeDetector handleWidth>
-        {(width) => (
-            width ? (width > theme.breakpoints.tablet 
-                ? <TabletOptionsWrapper>{arr}<Facebook size='18px' padding='0 10px'/></TabletOptionsWrapper>
-                : <MobileOptionsWrapper>{arr}<Facebook size='18px' padding='30px 10px' color={theme.color.text.secondary}/></MobileOptionsWrapper>
-            )
-            : <div></div>
+        {({width}) => (
+            width && (width > theme.breakpoints.tablet)
+            ? 
+                <TabletOptionsWrapper>
+                    {arr}
+                    <FacebookLink size='18px' padding='0 10px'/>
+                </TabletOptionsWrapper>
+            : 
+                <MobileOptionsWrapper>
+                    {arr}
+                    <FacebookLink size='18px' padding='30px 10px' color={theme.color.text.secondary}/>
+                </MobileOptionsWrapper>
         )}
         </ReactResizeDetector>
     )

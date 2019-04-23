@@ -28,8 +28,10 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-facebook": "^8.0.4",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.5.0",
+    "react-messenger-customer-chat": "^0.7.2",
     "react-resize-detector": "^4.0.5",
     "styled-components": "^4.2.0",
     "styled-components-breakpoint": "^2.1.1"

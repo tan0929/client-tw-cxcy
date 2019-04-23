@@ -23,6 +23,11 @@ collections:
         fields: # The fields for each document, usually in front matter
           - {label: "公司名稱", name: "title", widget: "string"}
           - {label: "公司介紹", name: "description", widget: "text"}
+          - {label: "電話", name: "phone", widget: "string"}
+          - {label: "住址", name: "address", widget: "string"}
+          - {label: "電子郵件信箱", name: "email", widget: "string"}
+          - {label: "Facebook", name: "facebook", widget: "string"}
+          - {label: "Instagram", name: "instagram", widget: "string"}
           - {label: "網頁縮略圖", name: "thumbnail", widget: "image"}
           - label: "首頁輪播圖片"
             name: "indexCarousel"
@@ -30,6 +35,7 @@ collections:
             allow_add: true
             field: {label: "圖片", name: "image", widget: "image"}
           - {label: "首頁公司簡介圖片", name: "indexIntroImage", widget: "image"}
+          - {label: "聯絡我們表格圖片", name: "contactFormImage", widget: "image"}
           - {label: "關於頁面橫幅", name: "aboutBanner", widget: "image"}
           - {label: "關鍵字", name: "keywords", widget: "list", default: ["keyword1", "keyword2", "keyword3"]}
           # 公司電話，地址，等等，可能會更改的所有重要信息

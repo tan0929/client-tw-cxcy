@@ -40,6 +40,8 @@ const CoverWrapper = styled.div`
     width: 252px;
     height: 152px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 `;
 
 const Title = styled.div`

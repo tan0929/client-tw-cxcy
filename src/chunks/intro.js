@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../components/button';
 import Img from 'gatsby-image';
 import breakpoint from 'styled-components-breakpoint';
 

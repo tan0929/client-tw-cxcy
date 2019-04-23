@@ -34,7 +34,7 @@ const Menu = ({values, setVisible})=>{
         <Wrapper>
             {values && values.length > 0 ? values.map(({node},index)=>(
                 <BetterLink key={index} to={node.fields.slug}>
-                    <MenuItem onClick={()=>setVisible(false)}>{node.frontmatter.title}</MenuItem>
+                    <MenuItem onClick={()=>setVisible && setVisible(false)}>{node.frontmatter.title}</MenuItem>
                 </BetterLink>
             )): <div>Empty Menu</div>}
         </Wrapper>

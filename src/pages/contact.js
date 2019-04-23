@@ -1,12 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextCard from '../components/textCard';
+import FacebookMessage from '../components/facebookMessage';
+
 
 const TextCardWrapper = styled.div`
     padding: 100px 0;
 `;
 
-const Contact = ()=>{
+const FormWrapper = styled.div`
+
+`;
+
+const ImageWrapper= styled.div`
+
+`;
+
+const Contact = ({data})=>{
+    const { title, address, email, phone } = data.setting.edges[0].node.frontmatter;
     return(
         <div>
             <TextCardWrapper>
@@ -14,16 +25,58 @@ const Contact = ()=>{
                     title="聯絡我們"
                     description={(
                         <div>
-                            <p>宸心宸藝工程</p>
-                            <p>臺中市台灣大道三段111號12樓</p>
-                            <p>contact@artmakertaiwan.com</p>
-                            <p>0980-496-060</p>
+                            <p>{title}</p>
+                            <p>{address}</p>
+                            <p>{email}</p>
+                            <p>{phone}</p>
                         </div>
                     )}
                 />
             </TextCardWrapper>
+            <FormWrapper>
+
+            </FormWrapper>
+            <FacebookMessage />
         </div>
     );
 };
 
 export default Contact;
+
+export const query = graphql`
+  query {
+    setting: allMarkdownRemark( filter: { 
+      frontmatter:{ type:{ eq: "setting" } }
+    }){
+      edges{
+        node{
+          frontmatter{
+            title
+            description
+            phone
+            address
+            email
+            contactFormImage{
+              childImageSharp{
+                fluid(maxWidth: 400){
+                  ...GatsbyImageSharpFluid_noBase64
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    services: allMarkdownRemark( filter: { 
+      frontmatter:{ templateKey:{ eq: "service" } }
+    }){
+      edges{
+        node{
+          frontmatter{
+            title
+          }
+        }
+      }
+    }
+  }
+`;
