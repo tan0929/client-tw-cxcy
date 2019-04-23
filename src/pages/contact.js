@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TextCard from '../components/textCard';
 import FacebookMessage from '../components/facebookMessage';
+import { graphql } from 'gatsby';
 
 
 const TextCardWrapper = styled.div`
