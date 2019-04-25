@@ -54,16 +54,21 @@ collections:
       - {label: "縮略圖", name: "thumbnail", widget: "image"}
       - label: "圖集"
         name: "gallery"
-        widget: "object"
-        fields: 
-          - label: "圖片組合"
-            name: "albums"
+        widget: "list"
+        allow_add: true
+        field: {label: "相冊標題", name: "albumTitle", widget: "string"}
+  - name: "albums"
+    label: "相冊"
+    folder: "src/md/albums"
+    slug: "{{slug}}"
+    create: true
+    delete: true
+    fields:
+      - {label: "Type", name: "type", widget: "hidden", default: "album"}
+      - {label: "標題", name: "title", widget: "string"}
+      - label: "内容"
+            name: "content"
             widget: "list"
-            fields: 
-              - {label: "標題", name: "title", widget: "string"}
-              - label: "内容"
-                name: "content"
-                widget: "list"
-                allow_add: true
-                field: {label: "圖片", name: "image", widget: "image"}
-                # TODO set require field
+            allow_add: true
+            field: {label: "圖片", name: "image", widget: "image"}
+

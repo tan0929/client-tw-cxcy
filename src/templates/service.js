@@ -37,20 +37,38 @@ export const ServiceTemplate = ({
         </TextCardWrapper>
         <QuoteButton text="咨詢估價" />
         <AlbumWrapper>
-            {gallery.albums.map(({title,content},index)=>{
-                return(<Album key={index} title={title} content={content} />)
+            {gallery.map(({title,fluids},index)=>{
+                return(<Album key={index} title={title} fluids={fluids} />)
             })}
         </AlbumWrapper>
     </div>
 );
 
 const Service = ({data})=>{ 
-    const { title, description, gallery } = data.markdownRemark.frontmatter;
+    const { 
+        title: serviceTitle, 
+        description: serviceDescription,
+        gallery: serviceGallery
+    } = data.markdownRemark.frontmatter;
+    const requestTitles = serviceGallery.albumTitle;
+    const allAlbums = data.allAlbums.edges;
+    let selectedAlbums = [];
+    requestTitles.forEach(requestTitle=>{
+        allAlbums.forEach(({node: album})=>{
+            requestTitle === album.frontmatter.title &&
+            selectedAlbums.push(
+                {
+                    title: requestTitle, 
+                    fluids: album.frontmatter.content.map(c=>c.childImageSharp.fluid)
+                }
+            );
+        })
+    })
     return(
         <ServiceTemplate
-            title={title}
-            description={description}
-            gallery={gallery}
+            title={serviceTitle}
+            description={serviceDescription}
+            gallery={selectedAlbums}
         />
     )
 };
@@ -64,12 +82,25 @@ export const query = graphql`
                 title
                 description
                 gallery{
-                    albums{
-                        title
-                        content
-                    }
+                    albumTitle
                 }
             }
+        }
+        allAlbums : allMarkdownRemark(filter:{ frontmatter:{ type:{ eq: "album"}}}){
+            edges{
+                node{
+                    frontmatter{
+                        title
+                        content{
+                            childImageSharp{
+                                fluid(maxWidth: 300){
+                                  ...GatsbyImageSharpFluid_noBase64
+                                }
+                            }
+                        }
+                    }
+                }
+            }   
         }
     }
 `;
