@@ -37,7 +37,7 @@ const Contact = ({data})=>{
             <FormWrapper>
 
             </FormWrapper>
-            <FacebookMessage />
+            {/* <FacebookMessage /> */}
         </div>
     );
 };

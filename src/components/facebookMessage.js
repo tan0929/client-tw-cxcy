@@ -11,9 +11,6 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 export default class FacebookMessage extends Component {
   render() {
     return (
-        // <FacebookProvider appId="388611788532974">
-        //     <MessageUs messengerAppId="388611788532974" pageId="2301403163467351"/>
-        // </FacebookProvider>
         <MessengerCustomerChat
             pageId="2301403163467351"
             appId="388611788532974"
