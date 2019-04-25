@@ -157,13 +157,13 @@ const MobileNav = ()=>{
         <div onClick={()=>setVisible(true)}>
             <FaBars size ='30px' color='#DDD'/>
         </div>
-        <StyledDrawer
+        {/* <StyledDrawer
             open={visible} 
             onClose={()=>setVisible(false)}
             anchor='right'
         >
             <Options setVisible={setVisible} />
-        </StyledDrawer>
+        </StyledDrawer> */}
     </IconWrapper>
     );
 }
