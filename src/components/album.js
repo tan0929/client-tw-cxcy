@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Modal from "@material-ui/core/Modal";
+//import Modal from "@material-ui/core/Modal";
 import Img from 'gatsby-image';
 import { IoIosClose, IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Carousel from 'nuka-carousel';
@@ -101,7 +101,7 @@ const Album = ({title, fluids})=>{
                 title={title}
                 fluid={fluids[0]} 
             />
-            <Modal
+            {/* <Modal
                 open={enable}
             >
                 <ModalPaper>
@@ -127,7 +127,7 @@ const Album = ({title, fluids})=>{
                     </Carousel>
                     <CloseButton onClick={e=>setEnable(false)}/>
                 </ModalPaper>
-            </Modal>
+            </Modal> */}
         </Wrapper>
     );
 };

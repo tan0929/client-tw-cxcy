@@ -8,7 +8,7 @@ import NavItem, { Text } from './navItem';
 import Menu from './menu';
 import BetterLink from './betterLink';
 import { FaBars } from 'react-icons/fa';
-import Drawer from '@material-ui/core/Drawer';
+//import Drawer from '@material-ui/core/Drawer';
 
 
 /*
@@ -135,9 +135,9 @@ const IconWrapper = styled.div`
     margin: 30px 30px 0 0;
 `;
 
-const StyledDrawer = styled(Drawer)`
-    opacity: 0.85;
-`;
+// const StyledDrawer = styled(Drawer)`
+//     opacity: 0.85;
+// `;
 
 const MobileOptionsWrapper = styled.div`
     display: flex;
