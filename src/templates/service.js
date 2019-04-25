@@ -36,11 +36,11 @@ export const ServiceTemplate = ({
             <TextCard title={title} description={description} />
         </TextCardWrapper>
         <QuoteButton text="咨詢估價" />
-        <AlbumWrapper>
+        {/* <AlbumWrapper>
             {gallery.map(({title,fluids},index)=>{
                 return(<Album key={index} title={title} fluids={fluids} />)
             })}
-        </AlbumWrapper>
+        </AlbumWrapper> */}
     </div>
 );
 
